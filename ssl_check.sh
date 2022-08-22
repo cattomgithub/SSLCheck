@@ -7,6 +7,7 @@ CURL_LOG="$WORK_PATH/curl.log"
 TMP_FILE="$WORK_PATH/tmp"
 JSON_FILE="$PWD/result.json" # 按照实际情况自行修改
 HTML_FILE="$PWD/index.html"  # 按照实际情况自行修改
+HTML_TITLE="Cat Tom's SSL Check" # 按照实际情况自行修改
 CURRENT_DATE="$(date)"
 CURRENT_TIMESTAMP="$(date -d "$CURRENT_DATE" +%s)"
 
@@ -133,14 +134,14 @@ HTML() {
     <link href="https://static.cattom.site/image/icon/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <!-- MDUI CSS -->
     <link rel="stylesheet" href="https://unpkg.com/mdui@1.0.2/dist/css/mdui.min.css" />
-    <title>Cat Tom's SSL Check</title>
+    <title>$HTML_TITLE</title>
 </head>
 
 <body class="mdui-appbar-with-toolbar mdui-theme-primary-teal mdui-theme-accent-blue">
 
     <header class="appbar mdui-appbar mdui-appbar-fixed">
         <div class="mdui-toolbar mdui-color-theme">
-            <a href="#" class="mdui-typo-title mdui-m-l-3">Cat Tom's SSL Check</a>
+            <a href="#" class="mdui-typo-title mdui-m-l-3">$HTML_TITLE</a>
             <div class="mdui-toolbar-spacer"></div>
             <a href="https://blog.cattom.site" target="_blank" class="mdui-btn mdui-btn-icon mdui-ripple"
                 mdui-tooltip="{content: 'Blog'}">

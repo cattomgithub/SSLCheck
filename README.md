@@ -19,14 +19,23 @@ nano ssl_check_list
 
 ./ssl_check [HTML/JSON]
 ```
+若需要定时检查 SSL 证书健康状况，可将该脚本加入系统 Cron 中。
+
+```sh
+crontab -e
+
+# 每天早上 6 时 30 分执行脚本并以 HTML 模式输出。
+30 6 * * * /root/SSLCheck/ssl_check.sh HTML
+```
 
 ## 可供修改的变量
-|    变量     |        默认值         |                    含义                    |
-| :---------: | :-------------------: | :----------------------------------------: |
-| `WORK_PATH` | `/root/logs/SSLCheck` | 脚本工作目录(存储脚本运行过程中的中间产物) |
-| `LIST_FILE` | `$PWD/ssl_check_list` |           域名列表文件的存储位置           |
-| `JSON_FILE` |  `$PWD/result.json`   |        `JSON` 模式输出文件存储位置         |
-| `HTML_FILE` |   `$PWD/index.html`   |        `HTML` 模式输出文件存储位置         |
+|     变量     |        默认值         |                    含义                    |
+| :----------: | :-------------------: | :----------------------------------------: |
+| `WORK_PATH`  | `/root/logs/SSLCheck` | 脚本工作目录(存储脚本运行过程中的中间产物) |
+| `LIST_FILE`  | `$PWD/ssl_check_list` |           域名列表文件的存储位置           |
+| `JSON_FILE`  |  `$PWD/result.json`   |        `JSON` 模式输出文件存储位置         |
+| `HTML_FILE`  |   `$PWD/index.html`   |        `HTML` 模式输出文件存储位置         |
+| `HTML_TITLE` |  Cat Tom's SSL Check  |          `HTML` 模式输出文件标题           |
 
 ## 目前已经发现的问题
 - `ssl_check_list` 文件最后需留空行，否则可能出现不可预知的错误...
