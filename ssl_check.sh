@@ -2,11 +2,11 @@
 
 # 变量
 WORK_PATH="/root/logs/SSLCheck"
-LIST_FILE="./ssl_check_list" # 按照实际情况自行修改
+LIST_FILE="$PWD/ssl_check_list" # 按照实际情况自行修改
 CURL_LOG="$WORK_PATH/curl.log"
 RESULT_FILE="$WORK_PATH/result.json"
 TMP_FILE="$WORK_PATH/tmp"
-HTML_FILE="./index.html" # 按照实际情况自行修改
+HTML_FILE="$PWD/index.html" # 按照实际情况自行修改
 CURRENT_DATE="$(date)"
 CURRENT_TIMESTAMP="$(date -d "$CURRENT_DATE" +%s)"
 
