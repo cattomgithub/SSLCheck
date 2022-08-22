@@ -1,12 +1,12 @@
 #!/bin/bash
 
 # 变量
-WORK_PATH="/root/logs/SSLCheck"
+WORK_PATH="/root/logs/SSLCheck" # 按照实际情况自行修改
 LIST_FILE="$PWD/ssl_check_list" # 按照实际情况自行修改
 CURL_LOG="$WORK_PATH/curl.log"
-RESULT_FILE="$WORK_PATH/result.json"
 TMP_FILE="$WORK_PATH/tmp"
-HTML_FILE="$PWD/index.html" # 按照实际情况自行修改
+JSON_FILE="$PWD/result.json" # 按照实际情况自行修改
+HTML_FILE="$PWD/index.html"  # 按照实际情况自行修改
 CURRENT_DATE="$(date)"
 CURRENT_TIMESTAMP="$(date -d "$CURRENT_DATE" +%s)"
 
@@ -17,17 +17,17 @@ fi
 
 # 检查 $1 是否为空
 if [ -z "$1" ]; then
-    echo "Where is the pattern???"
+    echo "SSLCheck v1.0 Cat Tom <cattom@cattom.site>
+    
+Usage: ./ssl_check.sh [HTML/JSON]"
     exit 1
 else
     # 选择模式
     Mode="$1"
 fi
 
-cd /root || exit
-# 保证目录存在
+# 保证工作目录存在
 mkdir -p "$WORK_PATH"
-
 
 # 检查 SSL
 Check() {
@@ -84,39 +84,39 @@ Check() {
 }
 
 JSON() {
-    echo "[" >"$RESULT_FILE"
+    echo "[" >"$JSON_FILE"
 
     while read -r Site; do
         Check
 
-        echo "{" >>"$RESULT_FILE"
+        echo "{" >>"$JSON_FILE"
 
         # Domain
-        echo '"Domain": "'"$Domain"'",' >>"$RESULT_FILE"
+        echo '"Domain": "'"$Domain"'",' >>"$JSON_FILE"
 
         # HTTP Version
-        echo '"HTTP_Version": "'"$HTTP_Version"'",' >>"$RESULT_FILE"
+        echo '"HTTP_Version": "'"$HTTP_Version"'",' >>"$JSON_FILE"
 
         # TLS/SSL Version
 
-        echo '"TLS_Version": "'"$TLS_Version"'",' >>"$RESULT_FILE"
+        echo '"TLS_Version": "'"$TLS_Version"'",' >>"$JSON_FILE"
 
         # Certificate information
-        echo '"Subject": "'"$Subject"'",' >>"$RESULT_FILE"
-        echo '"Start_Date": "'"$Start_Date"'",' >>"$RESULT_FILE"
-        echo '"Expire_Date": "'"$Expire_Date"'",' >>"$RESULT_FILE"
-        echo '"Issuer": "'"$Issuer"'",' >>"$RESULT_FILE"
-        echo '"Status": "'"$Status"'",' >>"$RESULT_FILE"
-        echo '"Remain_Day": "'"$Remain"'",' >>"$RESULT_FILE"
-        echo '"Last_Check": "'"$CURRENT_DATE"'"' >>"$RESULT_FILE"
+        echo '"Subject": "'"$Subject"'",' >>"$JSON_FILE"
+        echo '"Start_Date": "'"$Start_Date"'",' >>"$JSON_FILE"
+        echo '"Expire_Date": "'"$Expire_Date"'",' >>"$JSON_FILE"
+        echo '"Issuer": "'"$Issuer"'",' >>"$JSON_FILE"
+        echo '"Status": "'"$Status"'",' >>"$JSON_FILE"
+        echo '"Remain_Day": "'"$Remain"'",' >>"$JSON_FILE"
+        echo '"Last_Check": "'"$CURRENT_DATE"'"' >>"$JSON_FILE"
 
-        echo "}," >>"$RESULT_FILE"
+        echo "}," >>"$JSON_FILE"
 
     done <"$LIST_FILE"
 
-    echo "]" >>"$RESULT_FILE"
+    echo "]" >>"$JSON_FILE"
 
-    sed -i 'x; ${s|.*|}|;p;x}; 1d' "$RESULT_FILE"
+    sed -i 'x; ${s|.*|}|;p;x}; 1d' "$JSON_FILE"
 }
 
 HTML() {
