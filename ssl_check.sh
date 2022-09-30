@@ -1,12 +1,13 @@
 #!/bin/bash
 
 # 变量
-WORK_PATH="/root/logs/SSLCheck" # 按照实际情况自行修改
-LIST_FILE="$PWD/ssl_check_list" # 按照实际情况自行修改
-CURL_LOG="$WORK_PATH/curl.log"
-TMP_FILE="$WORK_PATH/tmp"
-JSON_FILE="$PWD/result.json" # 按照实际情况自行修改
-HTML_FILE="$PWD/index.html"  # 按照实际情况自行修改
+WORK_PATH="/root/SSLCheck"
+LOG_PATH="/root/logs/SSLCheck" # 按照实际情况自行修改
+LIST_FILE="$WORK_PATH/ssl_check_list" # 按照实际情况自行修改
+CURL_LOG="$LOG_PATH/curl.log"
+TMP_FILE="$LOG_PATH/tmp"
+JSON_FILE="$WORK_PATH/result.json" # 按照实际情况自行修改
+HTML_FILE="$WORK_PATH/index.html"  # 按照实际情况自行修改
 HTML_TITLE="Cat Tom's SSL Check" # 按照实际情况自行修改
 CURRENT_DATE="$(date)"
 CURRENT_TIMESTAMP="$(date -d "$CURRENT_DATE" +%s)"
@@ -28,7 +29,7 @@ else
 fi
 
 # 保证工作目录存在
-mkdir -p "$WORK_PATH"
+mkdir -p "$LOG_PATH"
 
 # 检查 SSL
 Check() {
